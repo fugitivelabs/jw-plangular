@@ -5,7 +5,7 @@ angular.module('JwPlangular', [])
   .controller('JwPlangularCtrl',  ['$scope', '$stateParams', '$state', function($scope, $stateParams, $state){
     $scope.setupVideo = function(id, options) {
       var playerId = id;
-      if($('#' + playerId).length > 0) { //throwing errors when visit preview selector no longer existed.
+      if($('#' + playerId).length > 0) { 
         jwplayer(playerId).setup(options);
       }
     }
