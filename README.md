@@ -1,5 +1,4 @@
 # jw-plangular
-============
 
 A simple Angular directive for JW-Player that works with ng-repeat
 
