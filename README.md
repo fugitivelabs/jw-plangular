@@ -1,6 +1,6 @@
 # jw-plangular
 
-A simple Angular directive for JW-Player that works with ng-repeat
+A simple Angular directive for JW-Player that works with dynamically loaded content (including ng-repeat).
 
 ## Dependencies
 - required:   
