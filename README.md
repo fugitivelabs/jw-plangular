@@ -50,7 +50,7 @@ angular.module('myApp', [
 
 The player options themselves are specific to jwplayer. See [jwplayer support](http://support.jwplayer.com) for more info
 
-To keep the player from loadding prematurely in the Angular digest cycle (an issue with ng-repeat), JwPlangular waits to fire the player until the scope in the watch-me field changes. So for single page players with static options, we must also assign a $scope variagle for the 'watch-me' to watch. 
+To keep the player from loadding prematurely in the Angular digest cycle (an issue with ng-repeat), JwPlangular waits to fire the player until the scope in the `watch-me` field changes. So for single page players with static options, we must also assign a $scope variagle for the `watch-me` to watch. 
 
 ```js 
 
@@ -90,6 +90,44 @@ Make sure you give the directive a `player-id=""`.
 ``` 
 
 ## To use with dynamic content (including ng-repeat): 
+
+With dynamic content, the `watch-me` field becomes the scope of the dynamic content, and we load the player options via a function in the controller. 
+
+```js 
+
+angular.module('myApp')
+  .controller('PlayerCtrl', ['$scope', function($scope) {
+
+    $scope.videoList = [
+      { id: 1, url: "http://youtu.be/iF9XGbm42xo" }
+      , { id: 2, url: "http://youtu.be/oMnQr4I0JIc" }
+      , { id: 3, url: "http://youtu.be/vMrfmGaHqgk" }
+    ]
+
+    $scope.fetchOptions = function(video) {
+      var playerOptions = { 
+        file: video.url
+        , width: "100%"
+        , stretching: "uniform"
+      };
+    }
+
+  }])
+;
+
+```
+
+In the markup, `watch-me` becomes the scope of the content in question. Use `fetch-options` instead of `options` to load dynamically. Don't forget to assign a unique `player-id` -- recommended use is the id of the video object itself. 
+
+```html 
+
+<div ng-controller="PlayerCtrl">
+  <div class="video-container" ng-repeat="video in videoList">
+    <jw-plangular watch-me="video" player-id="play{{video.id}}" fetch-options="fetchOptions(video)"></jw-plangular>
+  </div>
+</div>
+
+``` 
 
 
 
